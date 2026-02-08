@@ -2,9 +2,9 @@
 
 ---
 
-## 1. Executive Summary & Project Overview
+## Executive Summary & Project Overview
 
-### 1.1 Goals and Objectives
+### Goals and Objectives
 
 **Software Goals**
 - Provide a web-based platform for users to:
@@ -27,7 +27,7 @@
 
 ---
 
-### 1.2 Key Stakeholders and Their Roles
+### Key Stakeholders and Their Roles
 
 | Stakeholder | Role | Responsibilities |
 |------------|-----|------------------|
@@ -45,7 +45,7 @@
 
 ---
 
-### 1.3 Business Value and Expected Outcomes
+### Business Value and Expected Outcomes
 
 **Business Value**
 - Reduces the need for multiple fitness and wellness tools
@@ -61,7 +61,7 @@
 
 ---
 
-### 1.4 Critical Success Factors
+### Critical Success Factors
 
 The project is considered successful if:
 - The application deploys successfully to Azure App Service
@@ -72,9 +72,9 @@ The project is considered successful if:
 
 ---
 
-## 2. System Architecture
+## System Architecture
 
-### 2.1 Client-Side Architecture
+### Client-Side Architecture
 
 - **Application Type:** Browser-based web application
 - **User Interface:** Responsive web UI using Bootstrap
@@ -89,7 +89,7 @@ The project is considered successful if:
 
 ---
 
-### 2.2 Server-Side Architecture
+### Server-Side Architecture
 
 - **Programming Language & Runtime:** C# / .NET 10.0
 - **Framework:** ASP.NET Core MVC
@@ -111,9 +111,9 @@ The project is considered successful if:
 
 ---
 
-## 3. Functional Requirements
+## Functional Requirements
 
-### 3.1 User Stories / Use Cases
+### User Stories / Use Cases
 
 **Use Case: Log Workout**
 - **Actor:** Authenticated User
@@ -127,7 +127,7 @@ The project is considered successful if:
 
 ---
 
-### 3.2 Business Rules
+### Business Rules
 
 - **Data Validation Rules:**
   - Required fields must be completed
@@ -141,9 +141,9 @@ The project is considered successful if:
 
 ---
 
-## 4. Non-Functional Requirements
+## Non-Functional Requirements
 
-### 4.1 Performance Requirements
+### Performance Requirements
 
 - **Response Time:** Page loads within 3 seconds under normal load
 - **Throughput:** Supports basic CRUD operations for all users
@@ -151,7 +151,7 @@ The project is considered successful if:
 
 ---
 
-### 4.2 Security Requirements
+### Security Requirements
 
 - **Authentication Methods:** ASP.NET Core Identity
 - **Authorization Levels:** User-based access control
@@ -162,7 +162,7 @@ The project is considered successful if:
 
 ---
 
-### 4.3 Scalability and Availability
+### Scalability and Availability
 
 - **Uptime Requirements:** Best-effort availability under free-tier SLA
 - **Load Handling:** Designed for small user base
@@ -171,7 +171,7 @@ The project is considered successful if:
 
 ---
 
-## 5. Data Management
+## Data Management
 
 - **Data Models:** Users, Workouts, Activities, Nutrition Logs
 - **Relationships:** One-to-many relationships between users and entries
@@ -181,9 +181,9 @@ The project is considered successful if:
 
 ---
 
-## 6. Interface Specifications
+## Interface Specifications
 
-### 6.1 API Documentation
+### API Documentation
 
 - **Endpoints:** Internal MVC controller routes
 - **Request/Response Format:** HTTP requests with Razor Views
@@ -192,14 +192,14 @@ The project is considered successful if:
 
 ---
 
-### 6.2 External Interfaces
+### External Interfaces
 
 - **Integration Points:** None
 - **Communication Protocols:** HTTPS
 
 ---
 
-## 7. Infrastructure Requirements
+## Infrastructure Requirements
 
 - **Development Environment:** Visual Studio 2022/2026, .NET 10 SDK
 - **Testing Environment:** Local developer machines
@@ -209,7 +209,7 @@ The project is considered successful if:
 
 ---
 
-## 8. Quality Assurance
+## Quality Assurance
 
 - **Testing Requirements:** Manual functional testing
 - **Acceptance Criteria:** Core features operate without errors
@@ -219,7 +219,7 @@ The project is considered successful if:
 
 ---
 
-## 9. Documentation Needs
+## Documentation Needs
 
 - Technical documentation
 - User documentation
@@ -229,7 +229,7 @@ The project is considered successful if:
 
 ---
 
-## 10. Project Constraints and Assumptions
+## Project Constraints and Assumptions
 
 ### Technical Constraints
 - Limited resources due to Azure Free tier
