@@ -249,3 +249,12 @@ The project is considered successful if:
 ### Dependencies
 - Microsoft Azure availability
 - .NET framework updates
+
+## Non-Technical Executive Summary
+
+### For Executives
+-  This project delivers a web-based fitness and wellness tracking application
+that allows users to manage workouts, nutrition notes, and wellness data
+from a single secure platform. The system demonstrates a scalable,
+cloud hosted software as a service model using modern web technologies
+and industry standard security practices.
