@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Log Activity";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card bg-secondary shadow-lg border-0">
+                <div class="card-header bg-info text-white text-center">
+                    <h3 class="mb-0">New Activity Log</h3>
+                </div>
+                <div class="card-body p-4 text-white">
+                    <form>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Date</label>
+                                <input type="date" class="form-control bg-dark text-white border-0" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Activity Type</label>
+                                <select class="form-select bg-dark text-white border-0">
+                                    <option>Running / Walking</option>
+                                    <option>Weightlifting</option>
+                                    <option>Cardio Machine</option>
+                                    <option>Swimming</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="p-3 mb-4 rounded" style="background-color: rgba(0,0,0,0.2);">
+                            <h6 class="text-info text-uppercase small fw-bold">Endurance / Cardio</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-label">Distance (Miles)</label>
+                                    <input type="number" step="0.1" class="form-control" placeholder="0.0">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Time (Duration)</label>
+                                    <input type="time" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-3 mb-4 rounded" style="background-color: rgba(0,0,0,0.2);">
+                            <h6 class="text-info text-uppercase small fw-bold">Strength / Resistance</h6>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label class="form-label">Exercise</label>
+                                    <input type="text" class="form-control" placeholder="e.g. Bench Press">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Sets</label>
+                                    <input type="number" class="form-control" placeholder="0">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Reps</label>
+                                    <input type="number" class="form-control" placeholder="0">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="button" class="btn btn-info btn-lg fw-bold">Save Workout</button>
+                            <a asp-action="Index" class="btn btn-link text-white-50">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
