@@ -61,28 +61,24 @@ Form inputs utilize clear placeholder text (e.g., "e.g. 5k Run") to guide user i
 ---
 
 ## 5. Screen Documentation & Data Entry Shortcuts
+* Screenshots of all pages are listed in the images folder.*
 
 ### **Screen 1: Public Landing Page**
 * **Purpose:** Initial user conversion and branding.
 * **Elements:** Hero image, site mission statement, "Join Now" and "Member Login" buttons.
-* **Screenshot:** ![Landing Page](./images/landing.png)
 
 ### **Screen 2: Member Dashboard (Home)**
 * **Purpose:** Central navigation and user orientation.
 * **Elements:** Personalized greeting, Activity Card, Progress Card, and Settings Card.
-* **Screenshot:** ![Home Screen](./images/dashboard.png)
 
 ### **Screen 3: Log Activity (Data Entry)**
 * **Purpose:** High-frequency data entry.
 * **Input Types:** Dropdown (Activity Type), Number (Weight, Sets, Reps), Text (Exercise Name).
-* **Screenshot:** ![Track Screen](./images/track.png)
 
 ### **Screen 4: Performance Analytics (Progress)**
 * **Purpose:** High-level data visualization.
 * **Elements:** Line charts (Actual vs. Goal) and milestone completion lists.
-* **Screenshot:** ![Progress Screen](./images/progress.png)
 
 ### **Screen 5: User Settings & Profile**
 * **Purpose:** Management of account identity and physical biometrics.
 * **Input Types:** Text (Name), Email, Number (Weight, Height, Goal Weight).
-* **Screenshot:** ![Settings Screen](./images/settings.png)
