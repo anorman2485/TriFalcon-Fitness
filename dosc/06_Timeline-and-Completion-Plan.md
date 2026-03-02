@@ -213,18 +213,19 @@ Target Completion: April 13
 
 - **Don Tran**
   - Authentication & Security Model
-  - Repository Management
+  - End User Documentation
   - Technical Documentation
 
 - **Tiyler Miller**
-  - Azure Deployment
+  - Feature Development
   - Database Management
   - UI Styling & Infrastructure
 
 - **Alexis Norman**
-  - Feature Development
-  - End User Documentation
+  - Azure Deployment
+  - Repository Management
   - Form & UX Improvements
+    
 
 ## Technical Resources
 
