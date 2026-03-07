@@ -1,0 +1,29 @@
+# Assignment 7: CRUD Operations - Create a Record
+
+## 1. Testing Instructions for Grading
+To verify the "Create" functionality and data persistence in the cloud, please use the following credentials:
+
+* **Login Page:** [Click here to Login](https://trifalconfitness-bebpfncjd6gda0eu.canadacentral-01.azurewebsites.net/Identity/Account/Login)
+* **Test Username:** `professor@test.com`
+* **Test Password:** `Assignment7!`
+
+> **Note:** I have already pre-registered this account on the live Azure SQL database to demonstrate that the data persists successfully after the application session ends. You may also use the **Register** page to create a unique record of your own to test the real-time "Create" operation.
+
+---
+
+## 2. Technical Implementation
+The primary "Create" functionality is handled through the **ASP.NET Core Identity** system. 
+
+### Process Flow:
+1. The user submits the Registration form via a `POST` request.
+2. The `UserManager<ApplicationUser>` service validates the input.
+3. **Entity Framework Core** generates an `INSERT` command to the Azure SQL Database.
+4. A new record is created in the `[dbo].[AspNetUsers]` table.
+
+### Code Configuration (Program.cs):
+```csharp
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<ApplicationDbContext>();
