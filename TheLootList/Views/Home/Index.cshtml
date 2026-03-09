@@ -1,70 +1,84 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using TriFalcon_Fitness.Models
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
-
+﻿@model TriFalcon_Fitness.Models.ApplicationUser
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Home Dashboard";
 }
 
-@if (SignInManager.IsSignedIn(User))
-{
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="mb-4 text-primary">Welcome back, @User.Identity?.Name!</h2>
-                <hr />
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4 mb-3">
-                <div class="card shadow border-primary h-100">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Log Workout</h5>
-                        <p class="card-text">Record your sets, reps, and weight for today's session.</p>
-                        <a asp-controller="Home" asp-action="Track" class="btn btn-primary">Start Logging</a>
+<div class="container mt-5">
+    @* Case 1: User is Logged In and Data is Available *@
+    @if (User.Identity?.IsAuthenticated == true && Model != null)
+    {
+        <div class="p-5 mb-4 bg-dark rounded-3 shadow-lg border border-primary animate__animated animate__fadeIn">
+            <div class="container-fluid py-3">
+                <h1 class="display-5 fw-bold text-primary">Welcome Back, @(string.IsNullOrEmpty(Model.FullName) ? "Athlete" : Model.FullName)!</h1>
+                <p class="fs-4 text-light">You're currently tracking at <strong>@Model.Weight lbs</strong>.</p>
+                
+                <div class="row mt-4 g-3">
+                    <div class="col-md-4">
+                        <div class="p-3 border border-secondary rounded bg-secondary bg-opacity-10">
+                            <small class="text-info text-uppercase fw-bold">Current Weight</small>
+                            <h3 class="text-white">@Model.Weight <small class="fs-6">lbs</small></h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 border border-secondary rounded bg-secondary bg-opacity-10">
+                            <small class="text-success text-uppercase fw-bold">Goal Weight</small>
+                            <h3 class="text-white">@Model.GoalWeight <small class="fs-6">lbs</small></h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 border border-secondary rounded bg-secondary bg-opacity-10">
+                            <small class="text-warning text-uppercase fw-bold">Target Lift</small>
+                            <h3 class="text-white">@Model.TargetStrengthWeight <small class="fs-6">lbs</small></h3>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4 mb-3">
-                <div class="card shadow h-100">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">View Progress</h5>
-                        <p class="card-text">Analyze your strength gains and volume charts.</p>
-                        <a asp-controller="Home" asp-action="Progress" class="btn btn-outline-success">View Stats</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-3">
-                <div class="card shadow h-100">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Settings</h5>
-                        <p class="card-text">Update your fitness goals and account profile.</p>
-                        <a asp-controller="Home" asp-action="Settings" class="btn btn-outline-secondary">Edit Profile</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-}
-else
-{
-    <div class="container mt-5">
-        <div class="row align-items-center p-4 p-md-5 rounded-3 border shadow-lg bg-dark text-white">
-            <div class="col-lg-6">
-                <h1 class="display-4 fw-bold lh-1 mb-3">TriFalcon Fitness</h1>
-                <p class="lead mb-4">Elevate your training. Professional-grade workout tracking designed for athletes who demand data-driven results.</p>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                    <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Join Now</a>
-                    <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-light btn-lg px-4">Member Login</a>
-                </div>
-            </div>
-            <div class="col-lg-5 offset-lg-1 p-0 overflow-hidden shadow-lg rounded-3">
-                <img class="img-fluid" src="~/Images/TFFgym.jpg" alt="Gym Interior" width="700">
+                <div class="d-flex gap-3 mt-5">
+                    <a asp-controller="Workouts" asp-action="Create" class="btn btn-primary btn-lg px-4 shadow">
+                        <i class="fas fa-plus me-2"></i>Log Workout
+                    </a>
+                    <a asp-controller="Home" asp-action="Progress" class="btn btn-outline-info btn-lg px-4">
+                        <i class="fas fa-chart-line me-2"></i>View Progress
+                    </a>
                 </div>
             </div>
         </div>
     }
+    @* Case 2: User is Not Logged In (Guest View) *@
+    else
+    {
+        <div class="text-center py-5 animate__animated animate__fadeIn">
+            <div class="mb-4">
+                <i class="fas fa-bolt fa-4x text-primary mb-3"></i>
+                <h1 class="display-3 fw-bold text-primary">TriFalcon Fitness</h1>
+                <p class="lead text-muted mx-auto" style="max-width: 600px;">
+                    The ultimate companion for tracking your strength progression, cardio milestones, and body transformation.
+                </p>
+            </div>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary btn-lg px-5 gap-3">Join Now</a>
+                <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-light btn-lg px-5">Login</a>
+            </div>
+            
+            <div class="row mt-5 g-4 text-center">
+                <div class="col-md-4">
+                    <i class="fas fa-dumbbell text-info mb-2"></i>
+                    <h6>Strength Tracking</h6>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-heartbeat text-danger mb-2"></i>
+                    <h6>Cardio Goals</h6>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-tasks text-success mb-2"></i>
+                    <h6>Custom Milestones</h6>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@* Optional: Add FontAwesome for the icons if you don't have it in _Layout *@
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+}

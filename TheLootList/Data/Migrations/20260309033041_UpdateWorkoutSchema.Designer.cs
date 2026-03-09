@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TriFalcon_Fitness.Data;
 
@@ -11,9 +12,11 @@ using TriFalcon_Fitness.Data;
 namespace TriFalcon_Fitness.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260309033041_UpdateWorkoutSchema")]
+    partial class UpdateWorkoutSchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -184,9 +187,6 @@ namespace TriFalcon_Fitness.Data.Migrations
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("GoalWeight")
-                        .HasColumnType("float");
-
                     b.Property<double>("Height")
                         .HasColumnType("float");
 
@@ -215,21 +215,6 @@ namespace TriFalcon_Fitness.Data.Migrations
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TargetCardioType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("TargetDistance")
-                        .HasColumnType("float");
-
-                    b.Property<int>("TargetDuration")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TargetExercise")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("TargetStrengthWeight")
-                        .HasColumnType("float");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");

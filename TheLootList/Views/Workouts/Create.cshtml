@@ -4,68 +4,95 @@
     ViewData["Title"] = "Log Activity";
 }
 
-<h1>Log Your Workout</h1>
-
-<h4>Enter your details below</h4>
-<hr />
-<div class="row">
-    <div class="col-md-6">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-            <div class="form-group mb-3">
-                <label asp-for="ActivityType" class="control-label">Activity Type (e.g. Cardio, Strength)</label>
-                <input asp-for="ActivityType" class="form-control" placeholder="Strength" />
-                <span asp-validation-for="ActivityType" class="text-danger"></span>
-            </div>
-
-            <div class="form-group mb-3">
-                <label asp-for="ExerciseName" class="control-label">Exercise Name</label>
-                <input asp-for="ExerciseName" class="form-control" placeholder="Bench Press" />
-                <span asp-validation-for="ExerciseName" class="text-danger"></span>
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    <div class="form-group mb-3">
-                        <label asp-for="Weight" class="control-label"></label>
-                        <input asp-for="Weight" class="form-control" />
-                        <span asp-validation-for="Weight" class="text-danger"></span>
-                    </div>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card bg-dark text-white shadow-lg border-0">
+                <div class="card-header bg-primary text-white p-3">
+                    <h3 class="mb-0"><i class="fas fa-dumbbell me-2"></i>Log Your Workout</h3>
                 </div>
-                <div class="col">
-                    <div class="form-group mb-3">
-                        <label asp-for="Sets" class="control-label"></label>
-                        <input asp-for="Sets" class="form-control" />
-                        <span asp-validation-for="Sets" class="text-danger"></span>
-                    </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label asp-for="ActivityType" class="form-label fw-bold text-info">Activity Type</label>
+                                <select asp-for="ActivityType" class="form-select bg-secondary text-white border-0">
+                                    <option value="Strength">Strength Training</option>
+                                    <option value="Cardio">Cardio / Endurance</option>
+                                    <option value="Flexibility">Yoga / Flexibility</option>
+                                    <option value="Sport">Sport / Competition</option>
+                                </select>
+                                <span asp-validation-for="ActivityType" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="ExerciseName" class="form-label fw-bold text-info">Exercise Name</label>
+                                @* Datalist allows for "Type or Select" flexibility *@
+                                <input asp-for="ExerciseName" class="form-control bg-secondary text-white border-0" list="exerciseOptions" placeholder="e.g. Squats or Running" />
+                                <datalist id="exerciseOptions">
+                                    <option value="Bench Press"></option>
+                                    <option value="Squats"></option>
+                                    <option value="Deadlift"></option>
+                                    <option value="Shoulder Press"></option>
+                                    <option value="5K Run"></option>
+                                    <option value="Cycling"></option>
+                                    <option value="Swimming"></option>
+                                </datalist>
+                                <span asp-validation-for="ExerciseName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <h6 class="text-uppercase text-muted small fw-bold mb-3 border-bottom border-secondary pb-2">Strength & Resistance</h6>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <label asp-for="Weight" class="form-label small">Weight Lifted</label>
+                                <div class="input-group">
+                                    <input asp-for="Weight" type="number" step="0.5" class="form-control bg-secondary text-white border-0" placeholder="0.0" />
+                                    <span class="input-group-text bg-secondary text-white border-0">lbs</span>
+                                </div>
+                                <span asp-validation-for="Weight" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Sets" class="form-label small">Sets</label>
+                                <input asp-for="Sets" type="number" class="form-control bg-secondary text-white border-0" placeholder="0" />
+                                <span asp-validation-for="Sets" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Reps" class="form-label small">Reps</label>
+                                <input asp-for="Reps" type="number" class="form-control bg-secondary text-white border-0" placeholder="0" />
+                                <span asp-validation-for="Reps" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <h6 class="text-uppercase text-muted small fw-bold mb-3 border-bottom border-secondary pb-2">Cardio & Duration</h6>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label asp-for="Distance" class="form-label small">Distance</label>
+                                <div class="input-group">
+                                    <input asp-for="Distance" type="number" step="0.01" class="form-control bg-secondary text-white border-0" placeholder="0.00" />
+                                    <span class="input-group-text bg-secondary text-white border-0">mi</span>
+                                </div>
+                                <span asp-validation-for="Distance" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="DurationMinutes" class="form-label small">Duration (Total Minutes)</label>
+                                <div class="input-group">
+                                    <input asp-for="DurationMinutes" type="number" class="form-control bg-secondary text-white border-0" placeholder="e.g. 45" />
+                                    <span class="input-group-text bg-secondary text-white border-0">min</span>
+                                </div>
+                                <span asp-validation-for="DurationMinutes" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <a asp-action="Index" class="btn btn-outline-light px-4 border-0">Cancel</a>
+                            <button type="submit" class="btn btn-primary btn-lg px-5 shadow">Save Workout</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="col">
-                    <div class="form-group mb-3">
-                        <label asp-for="Reps" class="control-label"></label>
-                        <input asp-for="Reps" class="form-control" />
-                        <span asp-validation-for="Reps" class="text-danger"></span>
-                    </div>
-                </div>
             </div>
-
-            <div class="form-group mb-3">
-                <label asp-for="Distance" class="control-label">Distance (miles/km)</label>
-                <input asp-for="Distance" class="form-control" />
-                <span asp-validation-for="Distance" class="text-danger"></span>
-            </div>
-
-            <div class="form-group mb-3">
-                <label asp-for="DurationMinutes" class="control-label">Duration (minutes)</label>
-                <input asp-for="DurationMinutes" class="form-control" />
-                <span asp-validation-for="DurationMinutes" class="text-danger"></span>
-            </div>
-
-            <div class="form-group mt-4">
-                <input type="submit" value="Save Workout" class="btn btn-success btn-lg" />
-                <a asp-action="Index" class="btn btn-secondary btn-lg">Cancel</a>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
