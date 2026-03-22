@@ -27,7 +27,7 @@ When the user navigates to this page, the system queries the `[dbo].[Workouts]` 
 Users can edit previously created workout records through the Edit page.
 
 * **Edit URL (Dynamic):**  
-`https://trifalconfitness-bebpfncjd6gda0eu.canadacentral-01.azurewebsites.net/Workouts/Edit/{id}`
+[https://trifalconfitness-bebpfncjd6gda0eu.canadacentral-01.azurewebsites.net/Workouts/Create]
 
 > **Note:** The `{id}` is automatically generated based on the selected workout record.
 
