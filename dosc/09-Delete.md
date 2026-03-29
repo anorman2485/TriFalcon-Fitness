@@ -1,72 +1,57 @@
-# Assignment 9: CRUD Operations – Delete a Record  
-**TriFalconFitness**
+# TriFalcon Fitness – Assignment 9: Delete Operation
+
+## Overview
+This project implements the **Delete functionality** for workout records in the TriFalcon Fitness web application. The application uses **ASP.NET Core MVC** with **Entity Framework** and **Identity** for user authentication.
+
+- **Deletion Strategy:** Hard Delete (records are permanently removed)
+- **User-Specific:** Only the logged-in user can delete their own workouts
+- **Database:** Azure SQL Database
 
 ---
 
-## 1. Testing Instructions for Grading
-
-To verify the **Delete functionality** and data persistence in the Azure SQL database, please use the following credentials:
-
+## Testing Instructions
 **Login Page:**  
-https://trifalconfitness-bebpfncjd6gda0eu.canadacentral-01.azurewebsites.net/Identity/Account/Login  
+[TriFalcon Fitness Login](https://trifalconfitness-bebpfncjd6gda0eu.canadacentral-01.azurewebsites.net/Identity/Account/Login)
 
-**Test Credentials:**  
-- Username: professor@test.com  
-- Password: Assignment7!  
+**Test Credentials:**
+- **Username:** professor@test.com  
+- **Password:** Assignment7!  
 
-**Data Note:**  
-This account contains workout records created in previous assignments (Assignment 7 and 8). These records can now be deleted for testing purposes.
-
----
-
-## 2. Deletion Strategy
-
-### Chosen Approach: Hard Delete (Permanent Deletion)
-
-The application implements a **hard delete strategy**, meaning records are permanently removed from the database when deleted.
-
-### How It Works
-- When a user deletes a workout, the record is **completely removed** from the database  
-- The record **cannot be recovered** after deletion  
-- Deleted records no longer appear in any queries or views  
-
-### Reasoning
-This approach was selected because:
-- Simpler implementation for a small-scale application  
-- No additional database fields or logic required  
-- Provides immediate and clear feedback to users  
-- Reduces system complexity for development and maintenance  
+> The test account contains workouts from previous assignments. Use these to verify deletion.
 
 ---
 
-## 3. Technical Implementation
+## Deletion Flow
 
-### Delete Operation Flow
-
-1. User navigates to the **Workouts Index page**
-2. User selects a workout record
-3. User clicks the **Delete** button
-4. Application prompts for confirmation
-5. Upon confirmation:
-   - The record is permanently deleted from the database
-6. User is redirected back to the workouts list
-7. The deleted record no longer appears
+1. Log in to the application  
+2. Navigate to the **Workouts Index** page  
+3. Only workouts belonging to the logged-in user are listed  
+4. Click the **Delete** button on a workout  
+5. Confirm deletion on the confirmation page  
+6. The workout is **permanently deleted** and no longer appears in the list  
 
 ---
 
-### Controller Logic (Hard Delete)
+## Controller Implementation
 
 ```csharp
-[HttpPost]
+[HttpPost, ActionName("Delete")]
+[ValidateAntiForgeryToken]
 public async Task<IActionResult> DeleteConfirmed(int id)
 {
-    var workout = await _context.Workouts.FindAsync(id);
+    var user = await _userManager.GetUserAsync(User);
+    if (user == null) return Challenge();
 
-    if (workout != null)
+    var workout = await _context.Workouts
+        .FirstOrDefaultAsync(w => w.Id == id && w.UserId == user.Id);
+
+    if (workout == null)
     {
-        _context.Workouts.Remove(workout);
-        await _context.SaveChangesAsync();
+        return NotFound();
     }
+
+    _context.Workouts.Remove(workout);
+    await _context.SaveChangesAsync();
 
     return RedirectToAction(nameof(Index));
 }
