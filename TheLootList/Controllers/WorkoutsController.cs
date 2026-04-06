@@ -23,7 +23,6 @@ public class WorkoutsController : Controller
         var user = await _userManager.GetUserAsync(User);
         if (user == null) return Challenge();
 
-        // Fetches only YOUR workouts, newest first
         var workouts = await _context.Workouts
             .Where(w => w.UserId == user.Id)
             .OrderByDescending(w => w.DateLogged)
@@ -46,11 +45,9 @@ public class WorkoutsController : Controller
         var user = await _userManager.GetUserAsync(User);
         if (user == null) return NotFound();
 
-        // 1. Manually attach the logged-in User's ID and current timestamp
         workout.UserId = user.Id;
         workout.DateLogged = DateTime.Now;
 
-        // 2. CRITICAL: Remove validation for the User object so the save doesn't fail silently
         ModelState.Remove("UserId");
         ModelState.Remove("User");
 
@@ -58,14 +55,55 @@ public class WorkoutsController : Controller
         {
             _context.Add(workout);
             await _context.SaveChangesAsync();
-
-            // Redirect to the list to confirm it saved
             return RedirectToAction(nameof(Index));
         }
-
-        // If we reach here, there was a validation error (like a missing field)
         return View(workout);
     }
+
+    // --- NEW EDIT METHODS START HERE ---
+
+    // GET: Workouts/Edit/5
+    public async Task<IActionResult> Edit(int? id)
+    {
+        if (id == null) return NotFound();
+
+        var workout = await _context.Workouts.FindAsync(id);
+        if (workout == null) return NotFound();
+
+        var user = await _userManager.GetUserAsync(User);
+        if (workout.UserId != user?.Id) return Forbid();
+
+        return View(workout);
+    }
+
+    // POST: Workouts/Edit/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, [Bind("Id,ActivityType,ExerciseName,Weight,Sets,Reps,Distance,DurationMinutes,DateLogged,UserId")] Workout workout)
+    {
+        if (id != workout.Id) return NotFound();
+
+        // Prevent navigation property validation errors
+        ModelState.Remove("User");
+
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                _context.Update(workout);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!WorkoutExists(workout.Id)) return NotFound();
+                else throw;
+            }
+            return RedirectToAction(nameof(Index));
+        }
+        return View(workout);
+    }
+
+    // --- NEW EDIT METHODS END HERE ---
 
     // GET: Workouts/Delete/5
     public async Task<IActionResult> Delete(int? id)
@@ -93,5 +131,10 @@ public class WorkoutsController : Controller
 
         await _context.SaveChangesAsync();
         return RedirectToAction(nameof(Index));
+    }
+
+    private bool WorkoutExists(int id)
+    {
+        return _context.Workouts.Any(e => e.Id == id);
     }
 }

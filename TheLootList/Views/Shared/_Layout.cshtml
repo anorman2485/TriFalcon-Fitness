@@ -44,6 +44,17 @@
                                 <i class="fas fa-chart-line me-1"></i> Progress
                             </a>
                         </li>
+
+                        @* --- ASSIGNMENT 10 SECURITY LAYER START --- *@
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-danger fw-bold" asp-controller="Admin" asp-action="Index">
+                                    <i class="fas fa-user-shield me-1"></i> Admin Panel
+                                </a>
+                            </li>
+                        }
+                        @* --- ASSIGNMENT 10 SECURITY LAYER END --- *@
                     </ul>
 
                     @* Right side of Navbar *@

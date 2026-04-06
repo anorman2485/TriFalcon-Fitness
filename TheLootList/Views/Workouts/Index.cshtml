@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<TriFalcon_Fitness.Models.Workout>
+
 @{
     ViewData["Title"] = "Previous Workouts";
 }
@@ -6,18 +7,20 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="text-primary fw-bold">Previous Workouts</h2>
-        <a asp-action="Create" class="btn btn-success shadow-sm">Log New Workout</a>
+        <a asp-action="Create" class="btn btn-success shadow-sm">
+            <i class="fas fa-plus me-1"></i> Log New Workout
+        </a>
     </div>
 
     <div class="table-responsive shadow-lg rounded">
         <table class="table table-dark table-hover align-middle">
             <thead class="bg-primary text-white">
                 <tr>
-                    <th class="ps-3">Date</th>
-                    <th>Type</th>
-                    <th>Exercise</th>
-                    <th>Performance</th>
-                    <th class="text-center">Actions</th>
+                    <th class="ps-3 border-0">Date</th>
+                    <th class="border-0">Type</th>
+                    <th class="border-0">Exercise</th>
+                    <th class="border-0">Performance</th>
+                    <th class="text-center border-0">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,9 +45,21 @@
                             }
                         </td>
                         <td class="text-center">
-                            <a asp-action="Edit" asp-route-id="@item.Id" class="text-warning me-2"><i class="fas fa-edit"></i></a>
-                            <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger"><i class="fas fa-trash"></i></a>
+                            <div class="btn-group">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-warning border-0 me-2" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger border-0" title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
                         </td>
+                    </tr>
+                }
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="5" class="text-center py-4 text-muted italic">No workouts found. Start your journey by logging one!</td>
                     </tr>
                 }
             </tbody>
